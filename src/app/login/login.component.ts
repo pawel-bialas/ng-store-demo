@@ -14,7 +14,7 @@ export class LoginComponent {
 
   }
 
-  async googleLogin() {
-    await this.afAuth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
+   async googleLogin() {
+     await this.afAuth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
   }
 }
