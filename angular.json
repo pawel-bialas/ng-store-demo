@@ -120,6 +120,10 @@
               "devServerTarget": "sample-ng-store:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
     }

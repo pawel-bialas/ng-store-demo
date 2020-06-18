@@ -1,10 +1,27 @@
 {
-  "hosting": {
-    "public": "dist/sample-ng-store",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ]
-  }
+  "hosting": [
+    {
+      "public": "dist/sample-ng-store",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ]
+    },
+    {
+      "target": "sample-ng-store",
+      "public": "dist/sample-ng-store",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
 }

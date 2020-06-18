@@ -4,10 +4,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {RouterModule} from '@angular/router';
 import {ROUTES} from './routes';
 
+import {environment} from '../environments/environment';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AngularFireAuthModule} from '@angular/fire/auth';
-import {environment} from '../environments/environment';
 
 
 import { AppComponent } from './app.component';

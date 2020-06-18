@@ -23,6 +23,7 @@
     "@angular/router": "~9.1.9",
     "@ng-bootstrap/ng-bootstrap": "^6.1.0",
     "@popperjs/core": "^2.4.2",
+    "angularfire2": "^4.0.0-rc.1",
     "bootstrap": "^4.5.0",
     "firebase": "^7.15.1",
     "jquery": "^3.5.1",

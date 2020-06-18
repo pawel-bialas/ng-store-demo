@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "ng-sample-store"
+  },
+  "targets": {
+    "ng-sample-store": {
+      "hosting": {
+        "sample-ng-store": [
+          "ng-sample-store"
+        ]
+      }
+    }
   }
 }
