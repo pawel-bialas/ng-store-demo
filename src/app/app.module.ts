@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {RouterModule} from '@angular/router';
-import {ROUTES} from './routes';
+import {ROUTES} from './routing/routes';
 
 import {environment} from '../environments/environment';
 import {AngularFireModule} from '@angular/fire';
@@ -21,8 +21,11 @@ import { OrderSuccessComponent } from './order-success/order-success.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
-import {AuthService} from './auth.service';
-import {AuthGuardService} from './auth-guard.service';
+
+import {AuthService} from './authentication/auth.service';
+import {AuthGuardService} from './authentication/auth-guard.service';
+import {AdminAuthGuardService} from './admin/admin-auth-guard.service';
+import {UserService} from './user/user.service';
 
 
 
@@ -50,7 +53,9 @@ import {AuthGuardService} from './auth-guard.service';
   ],
   providers: [
     AuthService,
-    AuthGuardService
+    AuthGuardService,
+    AdminAuthGuardService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

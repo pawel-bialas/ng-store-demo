@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../auth.service';
+import {AuthService} from '../authentication/auth.service';
 import {Observable} from 'rxjs';
 import * as firebase from 'firebase';
 

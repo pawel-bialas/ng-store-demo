@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase'
 import {Observable} from 'rxjs';
-import {AuthService} from '../auth.service';
+import {AuthService} from '../authentication/auth.service';
 
 @Component({
   selector: 'main-nav',

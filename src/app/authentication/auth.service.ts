@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import * as firebase from 'firebase';
 import {Observable} from 'rxjs';
@@ -17,7 +17,7 @@ export class AuthService {
 
   async googleLogin() {
     const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
-    console.log(returnUrl || 'XCX');
+
     localStorage.setItem('returnUrl', returnUrl);
     await this.fireAuth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
   }
