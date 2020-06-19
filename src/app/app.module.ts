@@ -22,6 +22,7 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import {AuthService} from './auth.service';
+import {AuthGuardService} from './auth-guard.service';
 
 
 
@@ -48,7 +49,8 @@ import {AuthService} from './auth.service';
     AngularFireAuthModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })
