@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {AngularFireAuth} from '@angular/fire/auth';
+import {AuthService} from '../auth.service';
+import {Observable} from 'rxjs';
 import * as firebase from 'firebase';
 
 
@@ -10,11 +11,10 @@ import * as firebase from 'firebase';
 })
 export class LoginComponent {
 
-  constructor(private afAuth: AngularFireAuth) {
+  constructor(private auth: AuthService)  {
 
   }
-
-   async googleLogin() {
-     await this.afAuth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
+    async googleLogin() {
+      await this.auth.googleLogin();
   }
 }

@@ -1,0 +1,36 @@
+[debug] [2020-06-18T22:08:48.665Z] ----------------------------------------------------------------------
+[debug] [2020-06-18T22:08:48.668Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Paweł\Desktop\store-app\sample-ng-store\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2020-06-18T22:08:48.668Z] CLI Version:   8.4.2
+[debug] [2020-06-18T22:08:48.668Z] Platform:      win32
+[debug] [2020-06-18T22:08:48.668Z] Node Version:  v12.18.0
+[debug] [2020-06-18T22:08:48.676Z] Time:          Fri Jun 19 2020 00:08:48 GMT+0200 (GMT+02:00)
+[debug] [2020-06-18T22:08:48.676Z] ----------------------------------------------------------------------
+[debug] [2020-06-18T22:08:48.676Z] 
+[debug] [2020-06-18T22:08:48.685Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-06-18T22:08:48.686Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\Paweł\Desktop\store-app\sample-ng-store
+
+Before we get started, keep in mind:
+
+  * You are initializing in an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[info] i  .firebaserc already has a default project, using ng-sample-store. 
+[debug] [2020-06-18T22:09:04.941Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-06-18T22:09:04.941Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
