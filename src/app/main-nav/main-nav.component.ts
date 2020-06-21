@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import * as firebase from 'firebase'
-import {Observable} from 'rxjs';
+import {Component} from '@angular/core';
 import {AuthService} from '../authentication/auth.service';
 
 @Component({
@@ -12,7 +10,7 @@ export class MainNavComponent {
   constructor(public auth: AuthService) {
   }
 
-   async logout() {
+  async logout() {
     await this.auth.logout();
   }
 }

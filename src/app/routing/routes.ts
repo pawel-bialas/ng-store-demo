@@ -9,6 +9,7 @@ import {OrderSuccessComponent} from '../order-success/order-success.component';
 import {AdminProductsComponent} from '../admin/admin-products/admin-products.component';
 import {AdminOrdersComponent} from '../admin/admin-orders/admin-orders.component';
 import {AuthGuardService} from '../authentication/auth-guard.service';
+import {AdminAuthGuardService} from '../admin/admin-auth-guard.service';
 
 
 export const ROUTES: Routes = [
@@ -22,6 +23,6 @@ export const ROUTES: Routes = [
   {path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuardService]},
   {path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuardService]},
 
-  {path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuardService]},
-  {path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuardService]},
+  {path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuardService, AdminAuthGuardService]},
+  {path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuardService, AdminAuthGuardService]},
 ];
