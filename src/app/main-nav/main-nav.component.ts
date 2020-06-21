@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {AuthService} from '../authentication/auth.service';
+import {UserModel} from '../user/model/user-model';
 
 @Component({
   selector: 'main-nav',
@@ -7,7 +8,11 @@ import {AuthService} from '../authentication/auth.service';
   styleUrls: ['./main-nav.component.css']
 })
 export class MainNavComponent {
-  constructor(public auth: AuthService) {
+
+  userModel: UserModel;
+
+  constructor(private auth: AuthService) {
+    this.auth.userModel$.subscribe(userModel => this.userModel = userModel);
   }
 
   async logout() {
