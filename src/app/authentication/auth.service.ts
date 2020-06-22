@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import * as firebase from 'firebase';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
-import {UserModel} from '../user/model/user-model';
 import {switchMap} from 'rxjs/operators';
 import {UserService} from '../user/user.service';
+import {UserModel} from '../user/model/user-model';
 
 @Injectable({
   providedIn: 'root'
@@ -38,9 +38,10 @@ export class AuthService {
           if (user) {
             return this.userService.get(user.uid).valueChanges();
           } else {
-            return this.userService.get('').valueChanges();
+            return of(null);
           }
         }
       ));
   }
+
 }

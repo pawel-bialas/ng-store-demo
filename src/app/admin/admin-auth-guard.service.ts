@@ -3,16 +3,16 @@ import {AuthService} from '../authentication/auth.service';
 import {UserService} from '../user/user.service';
 import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
-import {map, switchMap} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminAuthGuardService implements CanActivate {
 
-  user$Sub: Subscription;
 
-  constructor(private auth: AuthService, private userService: UserService) {
+
+  constructor(private auth: AuthService) {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {

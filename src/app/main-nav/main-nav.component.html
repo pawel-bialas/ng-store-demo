@@ -15,7 +15,7 @@
           <a class="nav-link" routerLink="/login">Login</a>
         </li>
       </ng-template>
-      <li *ngIf="userModel as user; else anonymousUser" ngbDropdown class="nav-item dropdown">
+      <li *ngIf="userModel; else anonymousUser" ngbDropdown class="nav-item dropdown">
         <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
            aria-expanded="false">{{ userModel.name }}</a>
         <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
