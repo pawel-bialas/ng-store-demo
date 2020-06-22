@@ -13,7 +13,7 @@ import {AdminAuthGuardService} from '../admin/admin-auth-guard.service';
 import {ProductFormComponent} from '../admin/product-form/product-form.component';
 
 
-export const ROUTES: Routes = [
+export const  ROUTES: Routes = [
 
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},

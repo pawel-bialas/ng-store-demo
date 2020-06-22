@@ -1,17 +1,33 @@
+export interface Category {
+  key?: string;
+  name?: string;
+}
+
 import {Injectable} from '@angular/core';
-import {AngularFireDatabase} from '@angular/fire/database';
+import {AngularFireDatabase, AngularFireList} from '@angular/fire/database';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class CategoryService {
 
+  categories: AngularFireList<any>;
+  categories$: Observable<any[]>;
+
   constructor(private db: AngularFireDatabase) {
+    this.categories = db.list('/categories', query => {
+      return query.orderByChild('name');
+    });
+
+    this.categories$ = this.categories.snapshotChanges()
+      .pipe(map(value => value.map(category => ({key: category.payload.key, ...category.payload.val()}))));
   }
 
   getCategories() {
-    return this.db.list('/categories', ref => {
-      return ref.orderByChild('name');
-    });
+    return this.categories$;
   }
 }
