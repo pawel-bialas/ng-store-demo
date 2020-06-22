@@ -15,7 +15,7 @@ export class AuthService {
   constructor(private fireAuth: AngularFireAuth,
               private route: ActivatedRoute,
               private userService: UserService
-              ) {
+  ) {
     this.user$ = this.fireAuth.authState;
   }
 
@@ -32,9 +32,15 @@ export class AuthService {
     await this.fireAuth.signOut();
   }
 
-  get userModel$(): Observable<UserModel>  {
+  get userModel$(): Observable<UserModel> {
     return this.user$
-      .pipe(switchMap(user => this.userService.get(user.uid).valueChanges()));
+      .pipe(switchMap(user => {
+          if (user) {
+            return this.userService.get(user.uid).valueChanges();
+          } else {
+            return this.userService.get('').valueChanges();
+          }
+        }
+      ));
   }
-
 }
