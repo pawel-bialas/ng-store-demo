@@ -3,7 +3,8 @@ import {NgModule} from '@angular/core';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {RouterModule} from '@angular/router';
 import {ROUTES} from './routing/routes';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { CustomFormsModule } from 'ng2-validation';
 
 import {environment} from '../environments/environment';
 import {AngularFireModule} from '@angular/fire';
@@ -53,7 +54,10 @@ import {ProductService} from './products/product.service';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    FormsModule
+    FormsModule,
+    CustomFormsModule,
+    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     AuthService,

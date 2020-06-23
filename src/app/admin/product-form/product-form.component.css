@@ -1,5 +1,16 @@
 
 
 .form-control.ng-touched.ng-invalid {
-  border-left: 4px solid red;
+  border-left: 5px solid red;
 }
+
+.form-control.ng-touched.ng-valid {
+  border-left: 5px solid darkgreen;
+}
+
+.control-container{
+  justify-content: center;
+  width: 100%;
+}
+
+
