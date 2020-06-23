@@ -11,11 +11,12 @@ import {AuthGuardService} from '../authentication/auth-guard.service';
 import {AdminAuthGuardService} from '../admin/admin-auth-guard.service';
 import {ProductFormComponent} from '../admin/product-form/product-form.component';
 import {AppComponent} from '../app.component';
+import {HomeComponent} from '../home/home.component';
 
 
-export const  ROUTES: Routes = [
+export const ROUTES: Routes = [
 
-  {path: '', component: AppComponent},
+  {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'products', component: ProductsComponent},
   {path: 'my/cart', component: ShoppingCartComponent},
@@ -24,7 +25,8 @@ export const  ROUTES: Routes = [
   {path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuardService]},
   {path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuardService]},
 
-  {path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuardService, AdminAuthGuardService]},
   {path: 'admin/products/new', component: ProductFormComponent, canActivate: [AuthGuardService, AdminAuthGuardService]},
+  {path: 'admin/products/:id', component: ProductFormComponent, canActivate: [AuthGuardService, AdminAuthGuardService]},
+  {path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuardService, AdminAuthGuardService]},
   {path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuardService, AdminAuthGuardService]},
 ];

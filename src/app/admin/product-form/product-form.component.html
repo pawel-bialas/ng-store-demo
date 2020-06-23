@@ -5,6 +5,7 @@
         <label for="title">Title</label>
         <input
           #title
+          [(ngModel)]="product.title"
           formControlName="title"
           name="title"
           id="title"
@@ -21,6 +22,7 @@
         <span class="input-group-text">$</span>
         <input
           #price
+          [(ngModel)]="product.price"
           formControlName="price"
           name="price"
           id="price"
@@ -36,6 +38,7 @@
       <label for="category">Category</label>
       <select
         #category
+        [(ngModel)]="product.category"
         formControlName="category"
         name="category"
         id="category"
@@ -51,6 +54,7 @@
       <label for="imageUrl">ImageUrl</label>
       <input
         #imageUrl
+        [(ngModel)]="product.imageUrl"
         formControlName="imageUrl"
         required
         name="imageUrl"
@@ -64,14 +68,15 @@
         <div *ngIf="productForm.controls.imageUrl.hasError('url')">Provide a valid url address.</div>
       </div>
       <button class="btn btn-primary" type="submit">Save</button>
+      <button (click)="delete()" class="btn btn-danger" type="button">Delete</button>
     </form>
   </div>
   <div class="col-md-6">
     <div class="card" style="width: 18rem;">
-      <img [src]="imageUrl.value" class="card-img-top">
+      <img [src]="product?.imageUrl" class="card-img-top">
       <div class="card-body">
-        <h5 class="card-title">{{ title.value }}</h5>
-        <p class="card-text"> {{ price.value | currency: 'USD': true }}</p>
+        <h5 class="card-title">{{ product?.title }}</h5>
+        <p class="card-text"> {{ product?.price | currency: 'USD': true }}</p>
       </div>
     </div>
   </div>

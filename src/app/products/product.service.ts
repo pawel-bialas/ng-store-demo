@@ -1,12 +1,3 @@
-export interface Product {
-  key?: string;
-  title?: string;
-  price?: number;
-  category?: string;
-  imageUrl?: string;
-}
-
-
 import {Injectable} from '@angular/core';
 import {AngularFireDatabase, AngularFireList} from '@angular/fire/database';
 import {Observable} from 'rxjs';
@@ -26,9 +17,21 @@ export class ProductService {
     return this.db.list('/products').push(product);
   }
 
+  update(productId, product) {
+    return this.db.object('/products/' + productId).update(product);
+  }
+
   getProducts() {
     this.products = this.db.list('/products');
     return this.products$ = this.products.snapshotChanges()
       .pipe(map(value => value.map(product => ({key: product.payload.key, ...product.payload.val()}))));
+  }
+
+  findById(productId) {
+    return this.db.object('/products/' + productId);
+  }
+
+  delete(productId) {
+    return this.db.object('products/' + productId).remove();
   }
 }
