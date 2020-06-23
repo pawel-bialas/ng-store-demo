@@ -1,5 +1,4 @@
 import {Routes} from '@angular/router';
-import {HomeComponent} from '../home/home.component';
 import {LoginComponent} from '../login/login.component';
 import {ProductsComponent} from '../products/products.component';
 import {MyOrdersComponent} from '../my-orders/my-orders.component';
@@ -11,11 +10,12 @@ import {AdminOrdersComponent} from '../admin/admin-orders/admin-orders.component
 import {AuthGuardService} from '../authentication/auth-guard.service';
 import {AdminAuthGuardService} from '../admin/admin-auth-guard.service';
 import {ProductFormComponent} from '../admin/product-form/product-form.component';
+import {AppComponent} from '../app.component';
 
 
 export const  ROUTES: Routes = [
 
-  {path: '', component: HomeComponent},
+  {path: '', component: AppComponent},
   {path: 'login', component: LoginComponent},
   {path: 'products', component: ProductsComponent},
   {path: 'my/cart', component: ShoppingCartComponent},

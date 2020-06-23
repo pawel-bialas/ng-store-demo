@@ -31,6 +31,10 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     );
   }
 
+  ngOnDestroy(): void {
+    this.categorySub.unsubscribe();
+  }
+
   createProductForm(): FormGroup {
     return new FormGroup({
       title: new FormControl('', Validators.required),
@@ -45,7 +49,5 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     this.router.navigate(['/admin/products']);
   }
 
-  ngOnDestroy(): void {
-    this.categorySub.unsubscribe();
-  }
+
 }
