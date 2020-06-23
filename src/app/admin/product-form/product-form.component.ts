@@ -4,6 +4,7 @@ import {Subscription} from 'rxjs';
 import {ProductService} from '../../products/product.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {CustomValidators} from 'ng2-validation';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-product-form',
@@ -16,8 +17,10 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   categorySub: Subscription;
   productForm: FormGroup;
 
-  constructor(private categoryService: CategoryService,
-              private productService: ProductService
+  constructor(
+    private categoryService: CategoryService,
+    private productService: ProductService,
+    private router: Router
   ) {
     this.productForm = this.createProductForm();
   }
@@ -38,8 +41,8 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    console.log(this.productForm.value);
-    // this.productService.create(this.productForm.value);
+    this.productService.create(this.productForm.value);
+    this.router.navigate(['/admin/products']);
   }
 
   ngOnDestroy(): void {
