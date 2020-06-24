@@ -11,19 +11,25 @@ import {Product} from '../../products/model/Product';
 export class AdminProductsComponent implements OnInit, OnDestroy {
 
   products$: Product[];
+  filteredProducts$: Product[];
   productSub: Subscription;
 
   constructor(private productService: ProductService) {
+    this.productSub = this.productService.getProducts().subscribe(
+      products => this.filteredProducts$ = this.products$ = products
+    );
   }
 
   ngOnInit(): void {
-    this.productSub = this.productService.getProducts().subscribe(
-      products => this.products$ = products
-    );
   }
 
   ngOnDestroy(): void {
     this.productSub.unsubscribe();
   }
 
+  filter(query: string) {
+    this.filteredProducts$ = (query) ?
+      this.products$.filter(product => product.title.toLowerCase().includes(query.toLowerCase())) :
+      this.products$;
+  }
 }
