@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProductService} from '../../products/product.service';
-import {Subscription} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import {Product} from '../../products/model/Product';
 
 @Component({
@@ -10,13 +10,18 @@ import {Product} from '../../products/model/Product';
 })
 export class AdminProductsComponent implements OnInit, OnDestroy {
 
-  products$: Product[];
-  filteredProducts$: Product[];
+  dtTrigger: Subject<any> = new Subject();
+  dtOptions: DataTables.Settings = {};
+  products$: Product[] = [];
+  filteredProducts$: Product[] = [];
   productSub: Subscription;
 
   constructor(private productService: ProductService) {
     this.productSub = this.productService.getProducts().subscribe(
-      products => this.filteredProducts$ = this.products$ = products
+      products => {
+        this.filteredProducts$ = this.products$ = products;
+        this.dtTrigger.next();
+      }
     );
   }
 
@@ -25,11 +30,14 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.productSub.unsubscribe();
+    this.dtTrigger.unsubscribe();
   }
 
   filter(query: string) {
     this.filteredProducts$ = (query) ?
       this.products$.filter(product => product.title.toLowerCase().includes(query.toLowerCase())) :
       this.products$;
+
+    this.dtTrigger.next();
   }
 }

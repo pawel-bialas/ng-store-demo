@@ -4,7 +4,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {RouterModule} from '@angular/router';
 import {ROUTES} from './routing/routes';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { CustomFormsModule } from 'ng2-validation';
+import {CustomFormsModule} from 'ng2-validation';
+import { DataTablesModule } from 'angular-datatables';
+
 
 import {environment} from '../environments/environment';
 import {AngularFireModule} from '@angular/fire';
@@ -23,6 +25,7 @@ import {MyOrdersComponent} from './my-orders/my-orders.component';
 import {AdminProductsComponent} from './admin/admin-products/admin-products.component';
 import {AdminOrdersComponent} from './admin/admin-orders/admin-orders.component';
 import {ProductFormComponent} from './admin/product-form/product-form.component';
+
 
 import {AuthService} from './authentication/auth.service';
 import {AuthGuardService} from './authentication/auth-guard.service';
@@ -57,7 +60,8 @@ import {ProductService} from './products/product.service';
     FormsModule,
     CustomFormsModule,
     ReactiveFormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DataTablesModule
   ],
   providers: [
     AuthService,
