@@ -11,7 +11,12 @@ import {Product} from '../../products/model/Product';
 export class AdminProductsComponent implements OnInit, OnDestroy {
 
   dtTrigger: Subject<any> = new Subject();
-  dtOptions: DataTables.Settings = {};
+  dtOptions: DataTables.Settings = {
+    pagingType: 'full_numbers',
+    pageLength: 5,
+    responsive: true,
+    lengthChange: true
+  };
   products$: Product[] = [];
   filteredProducts$: Product[] = [];
   productSub: Subscription;
