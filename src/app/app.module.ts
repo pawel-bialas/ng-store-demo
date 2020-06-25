@@ -31,7 +31,7 @@ import {AuthService} from './authentication/auth.service';
 import {AuthGuardService} from './authentication/auth-guard.service';
 import {AdminAuthGuardService} from './admin/admin-auth-guard.service';
 import {UserService} from './user/user.service';
-import {CategoryService} from './admin/product-form/category.service';
+import {CategoryService} from './products/category.service';
 import {ProductService} from './products/product.service';
 
 
