@@ -22,7 +22,7 @@ export class CategoryService {
       .pipe(map(value => value.map(category => ({key: category.payload.key, ...category.payload.val()}))));
   }
 
-  getCategories() {
+  getAllCategories() {
     return this.categories$;
   }
 }

@@ -22,7 +22,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   productSub: Subscription;
 
   constructor(private productService: ProductService) {
-    this.productSub = this.productService.getProducts().subscribe(
+    this.productSub = this.productService.getAllProducts().subscribe(
       products => {
         this.filteredProducts$ = this.products$ = products;
         this.dtTrigger.next();

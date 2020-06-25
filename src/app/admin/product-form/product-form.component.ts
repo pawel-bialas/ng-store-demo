@@ -36,7 +36,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.categorySub = this.categoryService.getCategories().subscribe(
+    this.categorySub = this.categoryService.getAllCategories().subscribe(
       categories => this.categories$ = categories
     );
   }

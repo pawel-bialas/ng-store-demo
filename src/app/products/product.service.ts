@@ -21,7 +21,7 @@ export class ProductService {
     return this.db.object('/products/' + productId).update(product);
   }
 
-  getProducts() {
+  getAllProducts() {
     this.products = this.db.list('/products');
     return this.products$ = this.products.snapshotChanges()
       .pipe(map(value => value.map(product => ({key: product.payload.key, ...product.payload.val()}))));
