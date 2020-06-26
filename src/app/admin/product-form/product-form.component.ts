@@ -10,7 +10,7 @@ import {Category} from '../../products/model/Category';
 import {Product} from '../../products/model/Product';
 
 @Component({
-  selector: 'app-product-form',
+  selector: 'product-form',
   templateUrl: './product-form.component.html',
   styleUrls: ['./product-form.component.css']
 })

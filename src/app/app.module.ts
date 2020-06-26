@@ -33,6 +33,7 @@ import {AdminAuthGuardService} from './admin/admin-auth-guard.service';
 import {UserService} from './user/user.service';
 import {CategoryService} from './products/category.service';
 import {ProductService} from './products/product.service';
+import { ProductFilterComponent } from './products/product-filter/product-filter.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import {ProductService} from './products/product.service';
     MyOrdersComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    ProductFilterComponent
   ],
   imports: [
     BrowserModule,

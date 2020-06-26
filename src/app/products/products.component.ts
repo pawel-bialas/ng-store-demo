@@ -7,7 +7,7 @@ import {Category} from './model/Category';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
-  selector: 'app-products',
+  selector: 'products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
