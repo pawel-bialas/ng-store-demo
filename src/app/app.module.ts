@@ -5,7 +5,7 @@ import {RouterModule} from '@angular/router';
 import {ROUTES} from './routing/routes';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CustomFormsModule} from 'ng2-validation';
-import { DataTablesModule } from 'angular-datatables';
+import {DataTablesModule} from 'angular-datatables';
 
 
 import {environment} from '../environments/environment';
