@@ -10,8 +10,8 @@ import {map} from 'rxjs/operators';
 
 export class CategoryService {
 
-  categories: AngularFireList<any>;
-  categories$: Observable<any[]>;
+  private categories: AngularFireList<any>;
+  private categories$: Observable<any[]>;
 
   constructor(private db: AngularFireDatabase) {
     this.categories = db.list('/categories', query => {
