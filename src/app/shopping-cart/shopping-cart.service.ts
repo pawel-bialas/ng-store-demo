@@ -1,15 +1,20 @@
 import {Injectable, OnDestroy} from '@angular/core';
-import {AngularFireDatabase} from '@angular/fire/database';
-import {pipe, Subscription} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {AngularFireDatabase, AngularFireObject, SnapshotAction} from '@angular/fire/database';
+import {Observable, pipe, Subscription} from 'rxjs';
+import {map, switchMap} from 'rxjs/operators';
 import {Product} from '../products/model/Product';
+import {ShoppingCart} from './model/ShoppingCart';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShoppingCartService implements OnDestroy {
 
-  itemsSub: Subscription;
+  private itemsSub: Subscription;
+  private cartRef: AngularFireObject<any>;
+  private shoppingCart: ShoppingCart;
+  private cartSub: Subscription;
+
 
   constructor(private db: AngularFireDatabase) {
   }
@@ -19,11 +24,17 @@ export class ShoppingCartService implements OnDestroy {
     const itemRef = this.db.object('/shopping-carts/' + currentCartId + '/items/' + product.key);
 
     this.itemsSub = itemRef.snapshotChanges().subscribe(item => {
-        const quantity = item.payload.child('quantity').val();
-        itemRef.update({product, quantity: (quantity || 0) + 1});
-        this.itemsSub.unsubscribe();
-        return;
+      const quantity = item.payload.child('quantity').val();
+      itemRef.update({product, quantity: (quantity || 0) + 1});
+      this.itemsSub.unsubscribe();
+      return;
     });
+  }
+
+  async getCurrentCart()  {
+    const currentCartId = await this.getOrCreateCartId();
+    return this.cartRef = this.db.object('/shopping-carts/' + currentCartId);
+
   }
 
   private create() {
@@ -32,11 +43,9 @@ export class ShoppingCartService implements OnDestroy {
     });
   }
 
-  private fetchDbCart(cartId: string) {
-    return this.db.object('/shopping-carts' + cartId);
-  }
 
-  private async getOrCreateCartId() {
+
+  private async getOrCreateCartId(): Promise<string> {
     const cartId = localStorage.getItem('cartId');
     if (cartId) {
       return cartId;
@@ -48,6 +57,8 @@ export class ShoppingCartService implements OnDestroy {
 
   ngOnDestroy(): void {
     this.itemsSub.unsubscribe();
+    this.cartSub.unsubscribe();
   }
+
 }
 

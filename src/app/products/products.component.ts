@@ -3,6 +3,8 @@ import {ProductService} from './product.service';
 import {Product} from './model/Product';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
+import {ShoppingCartService} from '../shopping-cart/shopping-cart.service';
+import {ShoppingCart} from '../shopping-cart/model/ShoppingCart';
 
 @Component({
   selector: 'products',
@@ -14,12 +16,15 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   products: Product[] = [];
   filteredProducts: Product[] = [];
+  category: string;
+  currentCart: ShoppingCart;
   private productsSub: Subscription;
   private queryParamsSub: Subscription;
-  category: string;
+  private cartSub: Subscription;
 
   constructor(
     private productService: ProductService,
+    private shoppingCartService: ShoppingCartService,
     private route: ActivatedRoute
   ) {
     this.productsSub = this.productService.getAllProducts().subscribe(products => {
@@ -36,8 +41,16 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    await this.shoppingCartService.getCurrentCart().then(value => {
+      console.log(value);
+      this.cartSub = value.valueChanges().subscribe(cart => {
+        console.log(cart);
+        this.currentCart = cart;
+      });
+    });
   }
+
 
   ngOnDestroy(): void {
     this.productsSub.unsubscribe();
