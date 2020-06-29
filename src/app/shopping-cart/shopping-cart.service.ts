@@ -20,22 +20,27 @@ export class ShoppingCartService implements OnDestroy {
   }
 
   async addToCart(product: Product) {
+      await this.updateQuantity(product, 1);
+  }
+
+  async removeFromCart(product: Product) {
+    await this.updateQuantity(product, -1);
+  }
+
+  private async updateQuantity(product: Product, change: number) {
     const currentCartId = await this.getOrCreateCartId();
     const itemRef = this.db.object('/shopping-carts/' + currentCartId + '/items/' + product.key);
 
     this.itemsSub = itemRef.snapshotChanges().subscribe(item => {
       const quantity = item.payload.child('quantity').val();
-      itemRef.update({product, quantity: (quantity || 0) + 1});
+      itemRef.update({product, quantity: (quantity || 0) + change});
       this.itemsSub.unsubscribe();
       return;
     });
   }
 
-  async removeFromCart(product: Product) {
 
-  }
-
-  async getCurrentCart()  {
+  async getCurrentCart(): Promise<AngularFireObject<ShoppingCart>> {
     const currentCartId = await this.getOrCreateCartId();
     return this.cartRef = this.db.object('/shopping-carts/' + currentCartId);
 
@@ -46,7 +51,6 @@ export class ShoppingCartService implements OnDestroy {
       dateCreated: new Date().getTime()
     });
   }
-
 
 
   private async getOrCreateCartId(): Promise<string> {
