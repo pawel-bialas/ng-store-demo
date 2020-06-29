@@ -14,7 +14,7 @@ import {Subscription} from 'rxjs';
 export class MainNavComponent implements OnInit, OnDestroy {
 
   userModel: UserModel;
-  cart: ShoppingCart;
+  currentCart: ShoppingCart;
   cartSub: Subscription;
 
   constructor(
@@ -30,7 +30,7 @@ export class MainNavComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     await this.shoppingCartService.getCurrentCart().then(value => {
       this.cartSub = value.valueChanges().subscribe(cart => {
-        this.cart = new ShoppingCart(cart.items);
+        this.currentCart = new ShoppingCart(cart.itemsMap);
       });
     });
   }
