@@ -27,12 +27,18 @@ export class ProductCardComponent implements OnInit {
     this.cartService.addToCart(product);
   }
 
-    getQuantity() {
+  removeFromCart(product: Product) {
+    this.cartService.removeFromCart(product);
+  }
+
+  getQuantity() {
     if (!this.shoppingCart) {
       return 0;
     }
-    const item =  this.shoppingCart.items[this.product.key];
+    const item = this.shoppingCart.items[this.product.key];
     console.log(item);
     return item ? item.quantity : 0;
   }
+
+
 }

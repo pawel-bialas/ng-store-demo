@@ -31,6 +31,10 @@ export class ShoppingCartService implements OnDestroy {
     });
   }
 
+  async removeFromCart(product: Product) {
+
+  }
+
   async getCurrentCart()  {
     const currentCartId = await this.getOrCreateCartId();
     return this.cartRef = this.db.object('/shopping-carts/' + currentCartId);
@@ -59,6 +63,7 @@ export class ShoppingCartService implements OnDestroy {
     this.itemsSub.unsubscribe();
     this.cartSub.unsubscribe();
   }
+
 
 }
 
