@@ -12,8 +12,10 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./main-nav.component.css']
 })
 export class MainNavComponent implements OnInit, OnDestroy {
+
   userModel: UserModel;
-  itemsCount = 0;
+  cart: ShoppingCart;
+  cartSub: Subscription;
 
   constructor(
     private auth: AuthService,
@@ -23,22 +25,18 @@ export class MainNavComponent implements OnInit, OnDestroy {
     this.auth.userModel$.subscribe(userModel => this.userModel = userModel);
   }
 
-  // Only one instance per application, no need to unsubscribe;
+  // Only one instance per application, no need to unsubscribe, but let's do so ;) ;
 
   async ngOnInit() {
     await this.shoppingCartService.getCurrentCart().then(value => {
-      value.valueChanges().subscribe(cart => {
-        this.itemsCount = 0;
-        const items = cart.items;
-        const itemsKeys = Object.keys(items);
-        itemsKeys.forEach(itemKey => {
-        this.itemsCount = this.itemsCount + (items[itemKey].quantity);
-        });
+      this.cartSub = value.valueChanges().subscribe(cart => {
+        this.cart = new ShoppingCart(cart.items);
       });
     });
   }
 
   ngOnDestroy(): void {
+    this.cartSub.unsubscribe();
   }
 
   async logout() {

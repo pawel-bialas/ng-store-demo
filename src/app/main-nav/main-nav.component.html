@@ -8,7 +8,12 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" routerLink="/my/cart">Shopping Cart {{itemsCount}} <span class="sr-only">(current)</span></a>
+        <a class="nav-link" routerLink="/my/cart">
+          Shopping Cart
+          <span class="badge badge-warning badge-pill">
+            {{cart.totalItemsCount}}
+          </span>
+          <span class="sr-only">(current)</span></a>
       </li>
       <ng-template #anonymousUser>
         <li class="nav-item">
