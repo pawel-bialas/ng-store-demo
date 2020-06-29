@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-6">
-    <form [formGroup]="productForm" (submit)="save()">
+    <form  [formGroup]="productForm" (submit)="save()">
       <div class="control-container">
         <label for="title">Title</label>
         <input
@@ -17,7 +17,7 @@
           <div *ngIf="productForm.controls.title.hasError('required')">Title is required.</div>
         </div>
       </div>
-      <label for="price">Price</label>
+      <label for="price">Price</label>xx
       <div class="input-group-prepend">
         <span class="input-group-text">$</span>
         <input
@@ -72,13 +72,11 @@
     </form>
   </div>
   <div class="col-md-6">
-    <div *ngIf="productForm.controls.title.value" class="card" style="width: 18rem;">
-      <img [src]="product?.imageUrl" class="card-img-top">
-      <div class="card-body">
-        <h5 class="card-title">{{ product?.title }}</h5>
-        <p class="card-text"> {{ product?.price | currency: 'USD' : 'symbol' : '1.2-2' }}</p>
-      </div>
-    </div>
+    <product-card
+      *ngIf="productForm.controls.title.value"
+      [product]="productForm.value"
+      [show-actions]="false">
+    </product-card>
   </div>
 </div>
 

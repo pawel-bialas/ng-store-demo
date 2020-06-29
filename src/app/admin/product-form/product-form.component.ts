@@ -17,7 +17,8 @@ import {Product} from '../../products/model/Product';
 export class ProductFormComponent implements OnInit, OnDestroy {
 
   categories$: Category[];
-  categorySub: Subscription;
+  categoriesSub: Subscription;
+  productSub: Subscription;
   productForm: FormGroup;
   product: Product = {};
   private id: string;
@@ -31,18 +32,20 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     this.productForm = this.createProductForm();
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {
-      this.productService.findById(this.id).valueChanges().pipe(take(1)).subscribe(queryResult => this.product = queryResult);
+      this.productSub = this.productService.findById(this.id)
+        .valueChanges().pipe(take(1)).subscribe(queryResult => this.product = queryResult);
     }
   }
 
   ngOnInit(): void {
-    this.categorySub = this.categoryService.getAllCategories().subscribe(
+    this.categoriesSub = this.categoryService.getAllCategories().subscribe(
       categories => this.categories$ = categories
     );
   }
 
   ngOnDestroy(): void {
-    this.categorySub.unsubscribe();
+    this.categoriesSub.unsubscribe();
+    this.productSub.unsubscribe();
   }
 
   createProductForm(): FormGroup {

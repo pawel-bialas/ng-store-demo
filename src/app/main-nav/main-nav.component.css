@@ -3,3 +3,6 @@
 }
 
 
+.dropdown-menu, .dropdown-item {
+  z-index: 1;
+}
