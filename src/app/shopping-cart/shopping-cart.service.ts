@@ -19,18 +19,11 @@ export class ShoppingCartService implements OnDestroy {
     const itemRef = this.db.object('/shopping-carts/' + currentCartId + '/items/' + product.key);
 
     this.itemsSub = itemRef.snapshotChanges().subscribe(item => {
-      if (item.payload.hasChild('quantity')) {
         const quantity = item.payload.child('quantity').val();
-        itemRef.update({quantity: quantity + 1});
+        itemRef.update({product, quantity: (quantity || 0) + 1});
         this.itemsSub.unsubscribe();
         return;
-      } else {
-        itemRef.set({product, quantity: 1});
-        this.itemsSub.unsubscribe();
-        return;
-      }
     });
-
   }
 
   private create() {
