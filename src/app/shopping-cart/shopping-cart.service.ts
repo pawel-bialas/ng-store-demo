@@ -36,12 +36,25 @@ export class ShoppingCartService implements OnDestroy {
   countAllItems(cart: ShoppingCart): number {
     let itemsCount = 0;
     const items = cart.items;
-    const itemsKeys = Object.keys(items);
+    const itemsKeys = this.getProductIds(cart);
     itemsKeys.forEach(itemKey => {
       itemsCount = itemsCount + (items[itemKey].quantity);
     });
-    console.log('itemsCount ' + itemsCount);
     return itemsCount;
+  }
+
+  getProductIds(cart: ShoppingCart) {
+    return Object.keys(cart.items);
+  }
+
+  countTotalPrice(cart: ShoppingCart): number {
+    let sum = 0;
+    const itemsKeys = this.getProductIds(cart);
+    itemsKeys.forEach(itemKey => {
+      sum += (cart.items[itemKey].product.price);
+    });
+    console.log('sum' + sum);
+    return sum;
   }
 
   private async updateQuantity(product: Product, change: number) {
@@ -78,5 +91,7 @@ export class ShoppingCartService implements OnDestroy {
     this.itemsSub.unsubscribe();
     this.cartSub.unsubscribe();
   }
+
+
 }
 

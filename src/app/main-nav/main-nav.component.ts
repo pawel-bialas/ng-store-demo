@@ -24,7 +24,7 @@ export class MainNavComponent implements OnInit, OnDestroy {
     this.auth.userModel$.subscribe(userModel => this.userModel = userModel);
   }
 
-  // Only one instance per application, no need to unsubscribe;
+  // Only one instance per application, no need to unsubscribe, but let's do so :);
 
   async ngOnInit() {
     await this.shoppingCartService.getCurrentCart().then(value =>
