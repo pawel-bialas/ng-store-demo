@@ -20,11 +20,28 @@ export class ShoppingCartService implements OnDestroy {
   }
 
   async addToCart(product: Product) {
-      await this.updateQuantity(product, 1);
+    await this.updateQuantity(product, 1);
   }
 
   async removeFromCart(product: Product) {
     await this.updateQuantity(product, -1);
+  }
+
+  async getCurrentCart(): Promise<AngularFireObject<ShoppingCart>> {
+    const currentCartId = await this.getOrCreateCartId();
+    return this.cartRef = this.db.object('/shopping-carts/' + currentCartId);
+
+  }
+
+  countAllItems(cart: ShoppingCart): number {
+    let itemsCount = 0;
+    const items = cart.items;
+    const itemsKeys = Object.keys(items);
+    itemsKeys.forEach(itemKey => {
+      itemsCount = itemsCount + (items[itemKey].quantity);
+    });
+    console.log('itemsCount ' + itemsCount);
+    return itemsCount;
   }
 
   private async updateQuantity(product: Product, change: number) {
@@ -39,12 +56,6 @@ export class ShoppingCartService implements OnDestroy {
     });
   }
 
-
-  async getCurrentCart(): Promise<AngularFireObject<ShoppingCart>> {
-    const currentCartId = await this.getOrCreateCartId();
-    return this.cartRef = this.db.object('/shopping-carts/' + currentCartId);
-
-  }
 
   private create() {
     return this.db.list('/shopping-carts').push({
@@ -67,7 +78,5 @@ export class ShoppingCartService implements OnDestroy {
     this.itemsSub.unsubscribe();
     this.cartSub.unsubscribe();
   }
-
-
 }
 

@@ -3,7 +3,6 @@ import {AuthService} from '../authentication/auth.service';
 import {UserModel} from '../user/model/user-model';
 import {Router} from '@angular/router';
 import {ShoppingCartService} from '../shopping-cart/shopping-cart.service';
-import {ShoppingCart} from '../shopping-cart/model/ShoppingCart';
 import {Subscription} from 'rxjs';
 
 @Component({
@@ -14,7 +13,8 @@ import {Subscription} from 'rxjs';
 export class MainNavComponent implements OnInit, OnDestroy {
   userModel: UserModel;
   itemsCount: number;
-  currentCart: ShoppingCart;
+  private cartSub: Subscription;
+
 
   constructor(
     private auth: AuthService,
@@ -27,21 +27,16 @@ export class MainNavComponent implements OnInit, OnDestroy {
   // Only one instance per application, no need to unsubscribe;
 
   async ngOnInit() {
-    await this.shoppingCartService.getCurrentCart().then(value => {
-      value.valueChanges().subscribe(cart => {
-        this.itemsCount = 0;
-        const items = cart.items;
-        const itemsKeys = Object.keys(items);
-        itemsKeys.forEach(itemKey => {
-        this.itemsCount = this.itemsCount + (items[itemKey].quantity);
-        });
-      });
-    });
-  }
+    await this.shoppingCartService.getCurrentCart().then(value =>
+      this.cartSub = value.valueChanges().subscribe(cart => {
+        this.itemsCount = this.shoppingCartService.countAllItems(cart);
+      })
+    );
 
+  }
   ngOnDestroy(): void {
+    this.cartSub.unsubscribe();
   }
-
   async logout() {
     await this.auth.logout();
     this.router.navigate(['/']);
