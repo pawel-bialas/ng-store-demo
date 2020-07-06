@@ -16,8 +16,16 @@
     <tr *ngFor="let productId of productIds">
       <td>{{currentCart.items[productId].product.title}}</td>
       <td>{{currentCart.items[productId].product.price | currency: 'USD' : 'symbol' : '1.2-2' }}</td>
-      <td>{{currentCart.items[productId].quantity}}</td>
-      <td>{{(currentCart.items[productId].product.price) * (currentCart.items[productId].quantity) | currency: 'USD' : 'symbol' : '1.2-2' }}</td>
+      <td>
+        <product-quantity
+          [product]="currentCart.items[productId].product"
+          [shopping-cart]="currentCart">
+        </product-quantity>
+      </td>
+      <td>
+        {{(currentCart.items[productId].product.price) *
+      (currentCart.items[productId].quantity) | currency: 'USD' : 'symbol' : '1.2-2' }}
+      </td>
     </tr>
     </tbody>
     <tfoot>
@@ -25,7 +33,7 @@
       <td></td>
       <td></td>
       <td></td>
-      <td> <b>{{totalPrice  | currency: 'USD' : 'symbol' : '1.2-2'}}</b></td>
+      <td><b>{{totalPrice  | currency: 'USD' : 'symbol' : '1.2-2'}}</b></td>
     </tr>
     </tfoot>
   </table>
