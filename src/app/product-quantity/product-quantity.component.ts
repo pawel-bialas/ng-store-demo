@@ -13,28 +13,28 @@ export class ProductQuantityComponent implements OnInit {
   // tslint:disable-next-line:no-input-rename
   @Input('product') product: Product;
   // tslint:disable-next-line:no-input-rename
-  @Input('shopping-cart') shoppingCart;
+  @Input('shopping-cart') currentCart: ShoppingCart;
 
-  constructor(private cartService: ShoppingCartService) {
+  constructor(private shoppingCartService: ShoppingCartService) {
   }
 
   ngOnInit(): void {
   }
 
   addToCart() {
-    this.cartService.addToCart(this.product);
+    this.shoppingCartService.addToCart(this.product);
   }
 
   removeFromCart() {
-    this.cartService.removeFromCart(this.product);
+    this.shoppingCartService.removeFromCart(this.product);
   }
 
   getQuantity() {
-    if (!this.shoppingCart) {
+    if (!this.currentCart) {
       return 0;
     }
-    const item = this.shoppingCart.items[this.product.key];
+    const item = this.currentCart.items[this.product.key];
     return item ? item.quantity : 0;
   }
-
 }
+

@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Product} from '../products/model/Product';
 import {ShoppingCartService} from '../shopping-cart/shopping-cart.service';
+import {ShoppingCart} from '../shopping-cart/model/ShoppingCart';
 
 
 @Component({
@@ -15,22 +16,15 @@ export class ProductCardComponent implements OnInit {
   // tslint:disable-next-line:no-input-rename
   @Input('show-actions') showActions = true;
   // tslint:disable-next-line:no-input-rename
-  @Input('shopping-cart') currentCart;
+  @Input('shopping-cart') currentCart: ShoppingCart;
 
-  constructor(private cartService: ShoppingCartService) {
+  constructor(private shoppingCartService: ShoppingCartService) {
   }
-
   ngOnInit(): void {
   }
-
   addToCart() {
-    this.cartService.addToCart(this.product);
+    this.shoppingCartService.addToCart(this.product);
   }
-
-  removeFromCart() {
-    this.cartService.removeFromCart(this.product);
-  }
-
   getQuantity() {
     if (!this.currentCart) {
       return 0;
@@ -38,6 +32,4 @@ export class ProductCardComponent implements OnInit {
     const item = this.currentCart.items[this.product.key];
     return item ? item.quantity : 0;
   }
-
-
 }
