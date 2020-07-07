@@ -3,7 +3,15 @@ import {CartItem} from './CartItem';
 export class ShoppingCart {
   key?: string;
   dateCreated?: number;
-  items?: CartItem[];
+  items?: CartItem[] = [];
+
+  constructor(public itemsMap: { [key: string]: CartItem }) {
+    for (const key in itemsMap) {
+      const item = itemsMap[key];
+      this.items.push(new CartItem(item.product, item.quantity));
+    }
+    console.log(this.items);
+  }
 
   get totalItemsCount() {
     let itemsCount = 0;

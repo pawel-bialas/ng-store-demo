@@ -14,8 +14,7 @@ import {ShoppingCart} from '../shopping-cart/model/ShoppingCart';
 export class MainNavComponent implements OnInit, OnDestroy {
 
   userModel: UserModel;
-  itemsCount: number;
-  currentCart: ShoppingCart = new ShoppingCart();
+  currentCart: ShoppingCart;
   private cartSub: Subscription;
 
 
@@ -32,9 +31,10 @@ export class MainNavComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     await this.shoppingCartService.getCurrentCart().then(value =>
       this.cartSub = value.snapshotChanges().subscribe(cart => {
+        const itemsMap = cart.payload.child('items').val();
+        this.currentCart = new ShoppingCart(itemsMap);
         this.currentCart.key = cart.payload.key;
         this.currentCart.dateCreated = cart.payload.child('dateCreated').val();
-        this.currentCart.items = cart.payload.child('items').val();
       })
     );
 

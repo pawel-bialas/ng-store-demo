@@ -10,7 +10,7 @@ import {Subscription} from 'rxjs';
 })
 export class ShoppingCartComponent implements OnInit, OnDestroy {
 
-  currentCart: ShoppingCart = new ShoppingCart();
+  currentCart: ShoppingCart;
   itemsCount: number;
   productIds: string[];
   totalPrice: number;
@@ -22,9 +22,11 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     await this.shoppingCartService.getCurrentCart().then(value => {
       this.cartSub = value.snapshotChanges().subscribe(cart => {
+        // Fetch currentCart
+        const itemsMap = cart.payload.child('items').val();
+        this.currentCart = new ShoppingCart(itemsMap);
         this.currentCart.key = cart.payload.key;
         this.currentCart.dateCreated = cart.payload.child('dateCreated').val();
-        this.currentCart.items = cart.payload.child('items').val();
 
         this.productIds = this.shoppingCartService.getProductIds(this.currentCart);
         this.totalPrice = this.shoppingCartService.countTotalPrice(this.currentCart);

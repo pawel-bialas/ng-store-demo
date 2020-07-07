@@ -17,7 +17,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   products: Product[] = [];
   filteredProducts: Product[] = [];
   category: string;
-  currentCart: ShoppingCart = new ShoppingCart();
+  currentCart: ShoppingCart;
   private productsSub: Subscription;
   private queryParamsSub: Subscription;
   private cartSub: Subscription;
@@ -44,9 +44,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     await this.shoppingCartService.getCurrentCart().then(value => {
       this.cartSub = value.snapshotChanges().subscribe(cart => {
+        const itemsMap = cart.payload.child('items').val();
+        this.currentCart = new ShoppingCart(itemsMap);
         this.currentCart.key = cart.payload.key;
         this.currentCart.dateCreated = cart.payload.child('dateCreated').val();
-        this.currentCart.items = cart.payload.child('items').val();
       });
     });
   }
