@@ -4,6 +4,7 @@ import {UserModel} from '../user/model/user-model';
 import {Router} from '@angular/router';
 import {ShoppingCartService} from '../shopping-cart/shopping-cart.service';
 import {Subscription} from 'rxjs';
+import {ShoppingCart} from '../shopping-cart/model/ShoppingCart';
 
 @Component({
   selector: 'main-nav',
@@ -11,8 +12,10 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./main-nav.component.css']
 })
 export class MainNavComponent implements OnInit, OnDestroy {
+
   userModel: UserModel;
   itemsCount: number;
+  currentCart: ShoppingCart = new ShoppingCart();
   private cartSub: Subscription;
 
 
@@ -28,8 +31,10 @@ export class MainNavComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
     await this.shoppingCartService.getCurrentCart().then(value =>
-      this.cartSub = value.valueChanges().subscribe(cart => {
-        this.itemsCount = this.shoppingCartService.countAllItems(cart);
+      this.cartSub = value.snapshotChanges().subscribe(cart => {
+        this.currentCart.key = cart.payload.key;
+        this.currentCart.dateCreated = cart.payload.child('dateCreated').val();
+        this.currentCart.items = cart.payload.child('items').val();
       })
     );
 

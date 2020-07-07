@@ -38,7 +38,7 @@ export class ShoppingCartService implements OnDestroy {
     const items = cart.items;
     const itemsKeys = this.getProductIds(cart);
     itemsKeys.forEach(itemKey => {
-      itemsCount += (items[itemKey].quantity);
+      itemsCount = itemsCount + (items[itemKey].quantity);
     });
     return itemsCount;
   }
@@ -51,7 +51,7 @@ export class ShoppingCartService implements OnDestroy {
     let sum = 0;
     const itemsKeys = this.getProductIds(cart);
     itemsKeys.forEach(itemKey => {
-      sum += ((cart.items[itemKey].product.price) * (cart.items[itemKey].quantity));
+      sum += (cart.items[itemKey].product.price) * (cart.items[itemKey].quantity);
     });
     return sum;
   }
