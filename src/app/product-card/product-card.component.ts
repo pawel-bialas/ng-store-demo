@@ -29,6 +29,9 @@ export class ProductCardComponent implements OnInit {
     if (!this.currentCart) {
       return 0;
     }
+    if (!this.currentCart.items){
+      return 0;
+    }
     const item = this.currentCart.items[this.product.key];
     return item ? item.quantity : 0;
   }
