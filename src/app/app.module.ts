@@ -35,6 +35,7 @@ import {UserService} from './user/user.service';
 import {CategoryService} from './products/category.service';
 import {ProductService} from './products/product.service';
 import {ShoppingCartService} from './shopping-cart/shopping-cart.service';
+import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import {ShoppingCartService} from './shopping-cart/shopping-cart.service';
     AdminOrdersComponent,
     ProductFormComponent,
     ProductFilterComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    ProductQuantityComponent
   ],
   imports: [
     BrowserModule,

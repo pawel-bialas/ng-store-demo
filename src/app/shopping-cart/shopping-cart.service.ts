@@ -12,7 +12,6 @@ export class ShoppingCartService implements OnDestroy {
 
   private itemsSub: Subscription;
   private cartRef: AngularFireObject<any>;
-  private shoppingCart: ShoppingCart;
   private cartSub: Subscription;
 
 
@@ -34,24 +33,33 @@ export class ShoppingCartService implements OnDestroy {
   }
 
   countAllItems(cart: ShoppingCart): number {
+    if (!cart.items) {
+      return;
+    }
     let itemsCount = 0;
-    const items = cart.itemsMap;
+    const items = cart.items;
     const itemsKeys = this.getProductIds(cart);
     itemsKeys.forEach(itemKey => {
-      itemsCount = itemsCount + (items[itemKey].quantity);
+      itemsCount += (items[itemKey].quantity);
     });
     return itemsCount;
   }
 
   getProductIds(cart: ShoppingCart) {
-    return Object.keys(cart.itemsMap);
+    if (!cart.items) {
+      return;
+    }
+    return Object.keys(cart.items);
   }
 
   countTotalPrice(cart: ShoppingCart): number {
+    if (!cart.items) {
+      return;
+    }
     let sum = 0;
     const itemsKeys = this.getProductIds(cart);
     itemsKeys.forEach(itemKey => {
-      sum += (cart.itemsMap[itemKey].product.price) * (cart.itemsMap[itemKey].quantity);
+      sum += ((cart.items[itemKey].product.price) * (cart.items[itemKey].quantity));
     });
     return sum;
   }
@@ -62,9 +70,15 @@ export class ShoppingCartService implements OnDestroy {
 
     this.itemsSub = itemRef.snapshotChanges().subscribe(item => {
       const quantity = item.payload.child('quantity').val();
-      itemRef.update({product, quantity: (quantity || 0) + change});
-      this.itemsSub.unsubscribe();
-      return;
+      if ((quantity === 1) && (change === -1)) {
+        itemRef.remove();
+        this.itemsSub.unsubscribe();
+        return;
+      } else {
+        itemRef.update({product, quantity: (quantity || 0) + change});
+        this.itemsSub.unsubscribe();
+        return;
+      }
     });
   }
 
