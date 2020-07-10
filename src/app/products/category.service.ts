@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import {AngularFireDatabase, AngularFireList} from '@angular/fire/database';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -25,4 +25,6 @@ export class CategoryService {
   getAllCategories() {
     return this.categories$;
   }
+
+
 }

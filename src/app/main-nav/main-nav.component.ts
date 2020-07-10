@@ -4,6 +4,7 @@ import {UserModel} from '../user/model/user-model';
 import {Router} from '@angular/router';
 import {ShoppingCartService} from '../shopping-cart/shopping-cart.service';
 import {Subscription} from 'rxjs';
+import {ShoppingCart} from '../shopping-cart/model/ShoppingCart';
 
 @Component({
   selector: 'main-nav',
@@ -11,7 +12,9 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./main-nav.component.css']
 })
 export class MainNavComponent implements OnInit, OnDestroy {
+
   userModel: UserModel;
+  currentCart: ShoppingCart;
   itemsCount: number;
   private cartSub: Subscription;
 
@@ -21,22 +24,24 @@ export class MainNavComponent implements OnInit, OnDestroy {
     private router: Router,
     private shoppingCartService: ShoppingCartService
   ) {
-    this.auth.userModel$.subscribe(userModel => this.userModel = userModel);
   }
 
   // Only one instance per application, no need to unsubscribe, but let's do so :);
 
   async ngOnInit() {
     await this.shoppingCartService.getCurrentCart().then(value =>
-      this.cartSub = value.valueChanges().subscribe(cart => {
-        this.itemsCount = this.shoppingCartService.countAllItems(cart);
+      this.cartSub = value.snapshotChanges().subscribe(cart => {
+        this.currentCart = ({key: cart.key, ...cart.payload.val()});
+        this.itemsCount = this.shoppingCartService.countAllItems(this.currentCart);
       })
     );
-
+    this.auth.userModel$.subscribe(userModel => this.userModel = userModel);
   }
+
   ngOnDestroy(): void {
     this.cartSub.unsubscribe();
   }
+
   async logout() {
     await this.auth.logout();
     this.router.navigate(['/']);

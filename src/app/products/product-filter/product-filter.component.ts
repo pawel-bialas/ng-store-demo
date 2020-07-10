@@ -15,12 +15,12 @@ export class ProductFilterComponent implements OnInit, OnDestroy {
   private categoriesSub: Subscription;
 
   constructor(private categoryService: CategoryService) {
-    this.categoriesSub = this.categoryService.getAllCategories().subscribe(
-      categories => this.categories = categories
-    );
   }
 
   ngOnInit(): void {
+    this.categoriesSub = this.categoryService.getAllCategories().subscribe(
+      categories => this.categories = categories
+    );
   }
 
   ngOnDestroy(): void {

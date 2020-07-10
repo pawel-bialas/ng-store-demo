@@ -29,15 +29,16 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute
   ) {
+
+  }
+
+  ngOnInit(): void {
     this.productForm = this.createProductForm();
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {
       this.productSub = this.productService.findById(this.id)
         .valueChanges().pipe(take(1)).subscribe(queryResult => this.product = queryResult);
     }
-  }
-
-  ngOnInit(): void {
     this.categoriesSub = this.categoryService.getAllCategories().subscribe(
       categories => this.categories$ = categories
     );

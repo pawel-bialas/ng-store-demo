@@ -27,6 +27,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private shoppingCartService: ShoppingCartService,
     private route: ActivatedRoute
   ) {
+  }
+
+  async ngOnInit() {
     this.productsSub = this.productService.getAllProducts().subscribe(products => {
       this.products = products;
       this.filteredProducts = products;
@@ -38,10 +41,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
         this.filteredProducts.filter(product => product.category === this.category) :
         this.products;
     });
-
-  }
-
-  async ngOnInit() {
     await this.shoppingCartService.getCurrentCart().then(value => {
       this.cartSub = value.valueChanges().subscribe(cart => {
         this.currentCart = cart;

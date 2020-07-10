@@ -22,15 +22,15 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   productSub: Subscription;
 
   constructor(private productService: ProductService) {
+  }
+
+  ngOnInit(): void {
     this.productSub = this.productService.getAllProducts().subscribe(
       products => {
         this.filteredProducts$ = this.products$ = products;
         this.dtTrigger.next();
       }
     );
-  }
-
-  ngOnInit(): void {
   }
 
   ngOnDestroy(): void {

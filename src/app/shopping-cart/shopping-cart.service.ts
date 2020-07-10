@@ -33,16 +33,17 @@ export class ShoppingCartService implements OnDestroy {
   }
 
   countAllItems(cart: ShoppingCart): number {
-    if (!cart.items) {
-      return;
-    }
     let itemsCount = 0;
-    const items = cart.items;
-    const itemsKeys = this.getProductIds(cart);
-    itemsKeys.forEach(itemKey => {
-      itemsCount += (items[itemKey].quantity);
-    });
-    return itemsCount;
+    if (!cart.items) {
+      return itemsCount;
+    } else {
+      const items = cart.items;
+      const itemsKeys = this.getProductIds(cart);
+      itemsKeys.forEach(itemKey => {
+        itemsCount += (items[itemKey].quantity);
+      });
+      return itemsCount;
+    }
   }
 
   getProductIds(cart: ShoppingCart) {
