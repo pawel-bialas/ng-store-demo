@@ -10,7 +10,11 @@
       <li class="nav-item active">
         <a class="nav-link" routerLink="/my/cart">
           Shopping Cart
-          <span class="badge badge-warning badge-pill">{{itemsCount}}</span>
+          <span
+            *ngIf="currentCart"
+            class="badge badge-warning badge-pill">
+            {{currentCart.totalItemsCount}}
+          </span>
           <span class="sr-only">(current)</span>
         </a>
       </li>

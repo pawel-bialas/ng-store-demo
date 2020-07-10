@@ -6,7 +6,7 @@
   </div>
   <div *ngIf="showActions" class="card-footer">
     <button
-      *ngIf="!getQuantity() || getQuantity() === 0; else updateQuantity"
+      *ngIf="currentCart.singleItemCount(product) === 0 || !currentCart.singleItemCount(product); else updateQuantity"
       (click)="addToCart()"
       class="btn btn-primary btn-block">
       Add to Cart

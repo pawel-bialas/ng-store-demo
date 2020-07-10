@@ -26,13 +26,10 @@ export class ProductCardComponent implements OnInit {
     this.shoppingCartService.addToCart(this.product);
   }
   getQuantity() {
-    if (!this.currentCart) {
+    if (!this.currentCart || !this.currentCart.items || !this.currentCart.items[this.product.key]) {
       return 0;
+    } else {
+      return this.currentCart.items[this.product.key].quantity;
     }
-    if (!this.currentCart.items){
-      return 0;
-    }
-    const item = this.currentCart.items[this.product.key];
-    return item ? item.quantity : 0;
   }
 }

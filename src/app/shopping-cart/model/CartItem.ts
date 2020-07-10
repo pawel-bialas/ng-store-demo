@@ -1,7 +1,11 @@
 import {Product} from '../../products/model/Product';
 
-export interface CartItem {
-  key?: string;
-  product?: Product;
-  quantity?: number;
+export class CartItem {
+
+  constructor(public product: Product, public quantity: number, public key: string) {
+  }
+
+  get totalPrice(): number {
+    return this.product.price * this.quantity;
+  }
 }

@@ -41,13 +41,17 @@ export class ProductsComponent implements OnInit, OnDestroy {
         this.filteredProducts.filter(product => product.category === this.category) :
         this.products;
     });
-    await this.shoppingCartService.getCurrentCart().then(value => {
-      this.cartSub = value.valueChanges().subscribe(cart => {
-        this.currentCart = cart;
-      });
-    });
+    await this.shoppingCartService.getCurrentCart().then(value =>
+      this.cartSub = value.snapshotChanges().subscribe(cart => {
+        const items = cart.payload.child('items').val();
+        const key = cart.payload.key;
+        const dateCreated = cart.payload.child('dateCreated').val();
+        this.currentCart = new ShoppingCart(items);
+        this.currentCart.key = key;
+        this.currentCart.dateCreated = dateCreated;
+      })
+    );
   }
-
 
   ngOnDestroy(): void {
     this.productsSub.unsubscribe();

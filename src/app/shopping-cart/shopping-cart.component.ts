@@ -22,7 +22,12 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     await this.shoppingCartService.getCurrentCart().then(value => {
       this.cartSub = value.snapshotChanges().subscribe(cart => {
-        this.currentCart = ({key: cart.key, ...cart.payload.val()});
+        const items = cart.payload.child('items').val();
+        const key = cart.payload.key;
+        const dateCreated = cart.payload.child('dateCreated').val();
+        this.currentCart = new ShoppingCart(items);
+        this.currentCart.key = key;
+        this.currentCart.dateCreated = dateCreated;
         this.itemsCount = this.shoppingCartService.countAllItems(this.currentCart);
         this.productIds = this.shoppingCartService.getProductIds(this.currentCart);
         this.totalPrice = this.shoppingCartService.countTotalPrice(this.currentCart);
