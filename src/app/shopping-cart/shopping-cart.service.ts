@@ -32,6 +32,11 @@ export class ShoppingCartService implements OnDestroy {
 
   }
 
+  async clearCart() {
+    const currentCartId = await this.getOrCreateCartId();
+    return  this.db.object('/shopping-carts/' + currentCartId + '/items').remove();
+  }
+
   countAllItems(cart: ShoppingCart): number {
     let itemsCount = 0;
     if (!cart.items) {
@@ -105,6 +110,7 @@ export class ShoppingCartService implements OnDestroy {
     this.itemsSub.unsubscribe();
     this.cartSub.unsubscribe();
   }
+
 
 
 }
