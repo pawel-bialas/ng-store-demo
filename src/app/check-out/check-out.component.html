@@ -1,1 +1,63 @@
-<p>check-out works!</p>
+<div class="row">
+  <div class="col-md-6">
+    <form [formGroup]="orderForm">
+      <div class="control-container">
+        <label for="firstName">First Name</label>
+        <input
+          type="text"
+          formControlName="firstName"
+          id="firstName"
+          name="firstName"
+          class="form-control">
+      </div>
+      <div class="control-container">
+        <label for="lastName">Last Name</label>
+        <input
+          type="text"
+          formControlName="lastName"
+          id="lastName"
+          name="lastName"
+          class="form-control">
+      </div>
+      <div class="control-container">
+        <label for="addressLine1">Shipment Address</label>
+        <input
+          type="text"
+          formControlName="addressLine1"
+          id="addressLine1"
+          name="addressLine1"
+          class="form-control"
+        >
+      </div>
+      <div class="control-container">
+        <label for="addressLine2"></label>
+        <input
+          type="text"
+          value="123"
+          formControlName="addressLine2"
+          id="addressLine2"
+          name="addressLine2"
+          class="form-control"
+        >
+      </div>
+      <div class="control-container">
+        <label for="city">City</label>
+        <input
+          type="text"
+          formControlName="city"
+          id="city"
+          name="city"
+          class="form-control">
+      </div>
+      <div class="control-container">
+        <label for="postalCode">Postal Code</label>
+        <input
+          type="text"
+          formControlName="postalCode"
+          id="postalCode"
+          name="postalCode"
+          class="form-control">
+      </div>
+    </form>
+  </div>
+</div>

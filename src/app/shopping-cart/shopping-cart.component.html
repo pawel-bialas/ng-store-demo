@@ -41,9 +41,16 @@
     </tr>
     </tfoot>
   </table>
-  <button *ngIf="currentCart" (click)="clearCart()" class="btn btn-danger btn-sm">
-    Clear cart
-  </button>
+  <div *ngIf="currentCart.totalItemsCount > 0" class="w-100 d-flex flex-row">
+    <button (click)="clearCart()" class="btn btn-danger btn-sm w-25">
+      Clear Shopping Cart
+    </button>
+    <div class="w-75"></div>
+    <button routerLink="/check-out" class="btn btn-primary w-25">
+      Check Out
+    </button>
+  </div>
+
 </div>
 
 

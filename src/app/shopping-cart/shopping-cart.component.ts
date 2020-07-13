@@ -40,8 +40,12 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     this.shoppingCartService.clearCart();
   }
 
+  checkOut() {
+  }
+
   ngOnDestroy(): void {
     this.cartSub.unsubscribe();
   }
+
 
 }
