@@ -27,6 +27,7 @@ import {AdminOrdersComponent} from './admin/admin-orders/admin-orders.component'
 import {ProductFormComponent} from './admin/product-form/product-form.component';
 import { ProductFilterComponent } from './products/product-filter/product-filter.component';
 import { ProductCardComponent } from './product-card/product-card.component';
+import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
 
 import {AuthService} from './authentication/auth.service';
 import {AuthGuardService} from './authentication/auth-guard.service';
@@ -35,7 +36,7 @@ import {UserService} from './user/user.service';
 import {CategoryService} from './products/category.service';
 import {ProductService} from './products/product.service';
 import {ShoppingCartService} from './shopping-cart/shopping-cart.service';
-import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
+import {OrderService} from './check-out/order.service';
 
 
 @NgModule({
@@ -76,7 +77,8 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
     UserService,
     CategoryService,
     ProductService,
-    ShoppingCartService
+    ShoppingCartService,
+    OrderService
   ],
   bootstrap: [AppComponent]
 })

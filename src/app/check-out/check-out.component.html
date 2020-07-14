@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-6">
-    <form [formGroup]="orderForm">
+    <form [formGroup]="orderForm" (submit)="placeOrder()">
       <div class="control-container">
         <label for="firstName">First Name</label>
         <input
@@ -58,6 +58,7 @@
           name="postalCode"
           class="form-control">
       </div>
+      <button class="btn btn-primary order-button" type="submit">Place Order</button>
     </form>
   </div>
 </div>
