@@ -28,6 +28,8 @@ import {ProductFormComponent} from './admin/product-form/product-form.component'
 import { ProductFilterComponent } from './products/product-filter/product-filter.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
+import { ShoppingCartSummaryComponent } from './shopping-cart/shopping-cart-summary/shopping-cart-summary.component';
+import { ShippingFormComponent } from './check-out/shipping-form/shipping-form.component';
 
 import {AuthService} from './authentication/auth.service';
 import {AuthGuardService} from './authentication/auth-guard.service';
@@ -36,8 +38,7 @@ import {UserService} from './user/user.service';
 import {CategoryService} from './products/service/category.service';
 import {ProductService} from './products/service/product.service';
 import {ShoppingCartService} from './shopping-cart/service/shopping-cart.service';
-import {OrderService} from './check-out/order.service';
-import { ShoppingCartSummaryComponent } from './shopping-cart/shopping-cart-summary/shopping-cart-summary.component';
+import {OrderService} from './check-out/service/order.service';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { ShoppingCartSummaryComponent } from './shopping-cart/shopping-cart-summ
     ProductFilterComponent,
     ProductCardComponent,
     ProductQuantityComponent,
-    ShoppingCartSummaryComponent
+    ShoppingCartSummaryComponent,
+    ShippingFormComponent
   ],
   imports: [
     BrowserModule,

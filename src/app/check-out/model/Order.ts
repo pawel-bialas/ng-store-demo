@@ -1,7 +1,6 @@
 import {ShoppingCart} from '../../shopping-cart/model/ShoppingCart';
 
 export class Order {
-
   datePlaced: number;
   items: any[] = [];
 

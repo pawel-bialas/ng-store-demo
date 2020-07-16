@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from '../authentication/auth.service';
-import {UserModel} from '../user/model/user-model';
+import {UserModel} from '../user/model/UserModel';
 import {Router} from '@angular/router';
 import {ShoppingCartService} from '../shopping-cart/service/shopping-cart.service';
 import {Subscription} from 'rxjs';

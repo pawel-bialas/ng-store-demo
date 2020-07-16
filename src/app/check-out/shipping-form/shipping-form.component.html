@@ -1,0 +1,89 @@
+<form [formGroup]="orderForm" (submit)="placeOrder()">
+  <div class="control-container">
+    <label for="firstName">First Name</label>
+    <input
+      type="text"
+      formControlName="firstName"
+      id="firstName"
+      name="firstName"
+      class="form-control">
+    <div
+      class="alert alert-danger"
+      *ngIf="orderForm.controls.firstName.touched && orderForm.controls.firstName.invalid">
+      First Name is required.
+    </div>
+  </div>
+  <div class="control-container">
+    <label for="lastName">Last Name</label>
+    <input
+      type="text"
+      formControlName="lastName"
+      id="lastName"
+      name="lastName"
+      class="form-control">
+    <div
+      class="alert alert-danger"
+      *ngIf="orderForm.controls.lastName.touched && orderForm.controls.lastName.invalid">
+      Last Name is required.
+    </div>
+  </div>
+  <div class="control-container">
+    <label for="streetName">Shipment Address</label>
+    <input
+      type="text"
+      formControlName="streetName"
+      id="streetName"
+      name="streetName"
+      class="form-control"
+    >
+    <div
+      class="alert alert-danger"
+      *ngIf="orderForm.controls.streetName.touched && orderForm.controls.streetName.invalid">
+      Street Name is required.
+    </div>
+  </div>
+  <div class="control-container">
+    <label for="houseNumber"></label>
+    <input
+      type="text"
+      formControlName="houseNumber"
+      id="houseNumber"
+      name="houseNumber"
+      class="form-control"
+    >
+    <div
+      class="alert alert-danger"
+      *ngIf="orderForm.controls.houseNumber.touched && orderForm.controls.houseNumber.invalid">
+      House number is required.
+    </div>
+  </div>
+  <div class="control-container">
+    <label for="city">City</label>
+    <input
+      type="text"
+      formControlName="city"
+      id="city"
+      name="city"
+      class="form-control">
+    <div
+      class="alert alert-danger"
+      *ngIf="orderForm.controls.city.touched && orderForm.controls.city.invalid">
+      City is required.
+    </div>
+  </div>
+  <div class="control-container">
+    <label for="postalCode">Postal Code</label>
+    <input
+      type="text"
+      formControlName="postalCode"
+      id="postalCode"
+      name="postalCode"
+      class="form-control">
+    <div
+      class="alert alert-danger"
+      *ngIf="orderForm.controls.postalCode.touched && orderForm.controls.postalCode.invalid">
+      Postal Code is required.
+    </div>
+  </div>
+  <button class="btn btn-primary order-button" type="submit">Place Order</button>
+</form>
