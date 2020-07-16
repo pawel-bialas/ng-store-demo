@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {CategoryService} from '../../products/category.service';
+import {CategoryService} from '../../products/service/category.service';
 import {Subscription} from 'rxjs';
-import {ProductService} from '../../products/product.service';
+import {ProductService} from '../../products/service/product.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {CustomValidators} from 'ng2-validation';
 import {ActivatedRoute, Router} from '@angular/router';

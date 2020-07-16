@@ -33,10 +33,11 @@ import {AuthService} from './authentication/auth.service';
 import {AuthGuardService} from './authentication/auth-guard.service';
 import {AdminAuthGuardService} from './admin/admin-auth-guard.service';
 import {UserService} from './user/user.service';
-import {CategoryService} from './products/category.service';
-import {ProductService} from './products/product.service';
-import {ShoppingCartService} from './shopping-cart/shopping-cart.service';
+import {CategoryService} from './products/service/category.service';
+import {ProductService} from './products/service/product.service';
+import {ShoppingCartService} from './shopping-cart/service/shopping-cart.service';
 import {OrderService} from './check-out/order.service';
+import { ShoppingCartSummaryComponent } from './shopping-cart/shopping-cart-summary/shopping-cart-summary.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import {OrderService} from './check-out/order.service';
     ProductFormComponent,
     ProductFilterComponent,
     ProductCardComponent,
-    ProductQuantityComponent
+    ProductQuantityComponent,
+    ShoppingCartSummaryComponent
   ],
   imports: [
     BrowserModule,

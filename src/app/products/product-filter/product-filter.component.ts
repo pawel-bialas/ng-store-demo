@@ -1,7 +1,7 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Category} from '../model/Category';
 import {Subscription} from 'rxjs';
-import {CategoryService} from '../category.service';
+import {CategoryService} from '../service/category.service';
 
 @Component({
   selector: 'product-filter',

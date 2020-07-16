@@ -27,7 +27,7 @@
         </product-quantity>
       </td>
       <td class="text-right">
-        {{(item.totalPrice) | currency: 'USD' : 'symbol' : '1.2-2' }}
+        {{(item.totalItemPrice) | currency: 'USD' : 'symbol' : '1.2-2' }}
       </td>
     </tr>
     </tbody>
@@ -37,7 +37,7 @@
       <td></td>
       <td></td>
       <td></td>
-      <td class="text-right"><b>{{totalPrice  | currency: 'USD' : 'symbol' : '1.2-2'}}</b></td>
+      <td class="text-right"><b>{{currentCart.totalShoppingCartPrice  | currency: 'USD' : 'symbol' : '1.2-2'}}</b></td>
     </tr>
     </tfoot>
   </table>

@@ -13,11 +13,24 @@ export class ShoppingCart {
     }
   }
 
+  get totalShoppingCartPrice(): number {
+    let sum = 0;
+    if (!this.items || this.items.length === 0) {
+      return sum;
+    }
+    const itemsKeys = this.productIds;
+    itemsKeys.forEach(itemKey => {
+      sum += ((this.items[itemKey].product.price) * (this.items[itemKey].quantity));
+    });
+    return sum;
+  }
+
   get totalItemsCount(): number {
     if (!this.items) {
       return 0;
     }
     let count = 0;
+    // tslint:disable-next-line:forin
     for (const productId in this.items) {
       count += this.items[productId].quantity;
     }

@@ -2,10 +2,11 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {OrderService} from './order.service';
 import {AuthService} from '../authentication/auth.service';
-import {ShoppingCartService} from '../shopping-cart/shopping-cart.service';
+import {ShoppingCartService} from '../shopping-cart/service/shopping-cart.service';
 import {ShoppingCart} from '../shopping-cart/model/ShoppingCart';
 import {Subscription} from 'rxjs';
 import {Order} from './model/Order';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'check-out',
@@ -23,7 +24,8 @@ export class CheckOutComponent implements OnInit, OnDestroy {
   constructor(
     private orderService: OrderService,
     private authService: AuthService,
-    private shoppingCartService: ShoppingCartService
+    private shoppingCartService: ShoppingCartService,
+    private router: Router
   ) {
   }
 
@@ -53,10 +55,11 @@ export class CheckOutComponent implements OnInit, OnDestroy {
     });
   }
 
-  placeOrder() {
+   placeOrder() {
     if (this.currentCart && this.orderForm.valid) {
       const order = new Order(this.userId, this.orderForm.value, this.currentCart);
-      this.orderService.storeOrder(order);
+      const orderKey = this.orderService.storeOrder(order);
+      this.router.navigate(['/order-success', orderKey]);
     }
   }
 

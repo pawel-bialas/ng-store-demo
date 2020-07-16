@@ -5,12 +5,9 @@ export class Order {
   datePlaced: number;
   items: any[] = [];
 
-  constructor(public userId: string, public shipping: any, public currentCart: ShoppingCart) {
-    console.log(shipping);
-    console.log(currentCart);
-    console.log(userId);
+  constructor(public userId: string, public shipping: any, currentCart: ShoppingCart) {
     this.datePlaced = new Date().getTime();
-    this.items = this.currentCart.items.map(item => {
+    this.items = currentCart.items.map(item => {
       return {
         product: {
           title: item.product.title,
@@ -18,7 +15,7 @@ export class Order {
           price: item.product.price
         },
         quantity: item.quantity,
-        totalPrice: item.totalPrice
+        totalPrice: item.totalItemPrice
       };
     });
   }

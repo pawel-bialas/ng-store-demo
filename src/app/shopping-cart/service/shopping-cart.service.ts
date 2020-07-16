@@ -2,8 +2,8 @@ import {Injectable, OnDestroy} from '@angular/core';
 import {AngularFireDatabase, AngularFireObject, SnapshotAction} from '@angular/fire/database';
 import {Observable, pipe, Subscription} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
-import {Product} from '../products/model/Product';
-import {ShoppingCart} from './model/ShoppingCart';
+import {Product} from '../../products/model/Product';
+import {ShoppingCart} from '../model/ShoppingCart';
 
 @Injectable({
   providedIn: 'root'
