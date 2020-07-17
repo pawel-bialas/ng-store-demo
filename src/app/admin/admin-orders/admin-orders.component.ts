@@ -32,7 +32,7 @@ export class AdminOrdersComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
       this.orderService.getAllOrders().subscribe(value => {
         this.orders = value;
-        console.log(this.orders);
+        this.dtTrigger.next();
       });
   }
 
