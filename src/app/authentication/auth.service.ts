@@ -12,14 +12,14 @@ import {UserModel} from '../user/model/UserModel';
 })
 export class AuthService {
 
+  user$: Observable<firebase.User>;
+
   constructor(private fireAuth: AngularFireAuth,
               private route: ActivatedRoute,
               private userService: UserService
   ) {
     this.user$ = this.fireAuth.authState;
   }
-
-  user$: Observable<firebase.User>;
 
   async googleLogin() {
     const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');

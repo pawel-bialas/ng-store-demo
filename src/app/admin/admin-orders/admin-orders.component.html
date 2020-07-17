@@ -1,1 +1,21 @@
-<p>admin-orders works!</p>
+<table
+  datatable
+  [dtOptions]="dtOptions"
+  [dtTrigger]="dtTrigger"
+  class="row-border hover table"
+>
+  <thead>
+    <th>Customer</th>
+    <th>Order Date</th>
+    <th>Price</th>
+    <th>ID</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders">
+      <td>{{order.shipping.firstName}} {{order.shipping.lastName}}</td>
+      <td>{{order.datePlaced | date }}</td>
+      <td>{{order.orderPrice}}</td>
+      <td>{{order.key}}</td>
+    </tr>
+  </tbody>
+</table>
