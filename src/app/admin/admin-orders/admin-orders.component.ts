@@ -4,6 +4,7 @@ import {OrderService} from '../../check-out/service/order.service';
 import {AuthService} from '../../authentication/auth.service';
 import * as firebase from 'firebase';
 import {Order} from '../../check-out/model/Order';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'admin-orders',
@@ -13,7 +14,6 @@ import {Order} from '../../check-out/model/Order';
 export class AdminOrdersComponent implements OnInit, OnDestroy {
 
   orders: Order[] = [];
-  isAdmin = false;
   dtTrigger: Subject<any> = new Subject();
   dtOptions: DataTables.Settings = {
     pagingType: 'full_numbers',
@@ -21,23 +21,20 @@ export class AdminOrdersComponent implements OnInit, OnDestroy {
     responsive: true,
     lengthChange: true
   };
-  private authServiceSub: Subscription;
+  private ordersSub: Subscription;
 
-  constructor(private orderService: OrderService, private authService: AuthService) {
-    this.authServiceSub = this.authService.userModel$.subscribe(user => {
-      this.isAdmin = user.isAdmin;
-    });
+  constructor(private orderService: OrderService) {
   }
 
   ngOnInit(): void {
-      this.orderService.getAllOrders().subscribe(value => {
+      this.ordersSub = this.orderService.getAllOrders().subscribe(value => {
         this.orders = value;
         this.dtTrigger.next();
       });
   }
 
   ngOnDestroy(): void {
-    this.authServiceSub.unsubscribe();
+    this.ordersSub.unsubscribe();
   }
 
 }
