@@ -10,8 +10,10 @@ import {Observable} from 'rxjs';
 })
 export class OrderService {
 
-  ordersRef: AngularFireList<any>;
-  orders$: Observable<any>;
+  private allOrdersRef: AngularFireList<any>;
+  private allOrders$: Observable<any>;
+  private myOrdersRef: AngularFireList<any>;
+  private myOrders$: Observable<any>;
 
   constructor(private db: AngularFireDatabase, private shoppingCartService: ShoppingCartService) {
   }
@@ -22,16 +24,19 @@ export class OrderService {
     return storedOrder.key;
   }
 
-  getAllOrders() {
-    this.ordersRef = this.db.list('/orders');
-    return this.orders$ = this.ordersRef.snapshotChanges()
+  // Service
+   getAllOrders() {
+    this.allOrdersRef = this.db.list('/orders');
+    return this.allOrders$ =  this.allOrdersRef.snapshotChanges()
       .pipe(map(value => value.map(order => ({key: order.payload.key, ...order.payload.val()}))));
   }
 
-  getOrdersByUser(userId: string) {
-    return this.db.list('/orders/', query => {
-      return query.orderByChild('userId').equalTo(userId);
+   getOrdersByUser(userId) {
+    this.myOrdersRef =  this.db.list('/orders', ref => {
+      return ref.orderByChild('userId').equalTo(userId);
     });
+    return this.myOrders$ = this.myOrdersRef.snapshotChanges()
+      .pipe(map(value => value.map(order => ({key: order.payload.key, ...order.payload.val()}))));
   }
 }
 

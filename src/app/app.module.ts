@@ -39,6 +39,7 @@ import {CategoryService} from './products/service/category.service';
 import {ProductService} from './products/service/product.service';
 import {ShoppingCartService} from './shopping-cart/service/shopping-cart.service';
 import {OrderService} from './check-out/service/order.service';
+import { OrderDetailsComponent } from './order-details/order-details.component';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import {OrderService} from './check-out/service/order.service';
     ProductCardComponent,
     ProductQuantityComponent,
     ShoppingCartSummaryComponent,
-    ShippingFormComponent
+    ShippingFormComponent,
+    OrderDetailsComponent
   ],
   imports: [
     BrowserModule,

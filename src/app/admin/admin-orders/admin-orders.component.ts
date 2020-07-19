@@ -23,14 +23,14 @@ export class AdminOrdersComponent implements OnInit, OnDestroy {
   };
   private ordersSub: Subscription;
 
+
   constructor(private orderService: OrderService) {
   }
 
-  ngOnInit(): void {
-      this.ordersSub = this.orderService.getAllOrders().subscribe(value => {
-        this.orders = value;
-        this.dtTrigger.next();
-      });
+  async ngOnInit() {
+    this.ordersSub = this.orderService.getAllOrders().subscribe(orders => {
+      this.orders = orders;
+    });
   }
 
   ngOnDestroy(): void {

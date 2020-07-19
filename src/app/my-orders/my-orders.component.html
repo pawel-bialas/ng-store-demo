@@ -1,1 +1,24 @@
-<p>my-orders works!</p>
+<table
+  datatable
+  [dtOptions]="dtOptions"
+  [dtTrigger]="dtTrigger"
+  class="row-border hover table">
+  <thead>
+  <tr>
+    <th>Customer</th>
+    <th>Total Price</th>
+    <th>Date</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let order of myOrders$ | async">
+    <td>{{ order.shipping.lastName }} {{order.shipping.firstName}}</td>
+    <td>{{ order.orderPrice  | currency: 'USD' : 'symbol' : '1.2-2' }}</td>
+    <td>{{ order.datePlaced | date }}</td>
+    <td>
+      <button class="btn btn-primary" [routerLink]="['/admin/orders/', order.key]">View</button>
+    </td>
+  </tr>
+  </tbody>
+</table>

@@ -4,10 +4,11 @@ export class Order {
   key: string;
   datePlaced: number;
   items: any[] = [];
-  orderPrice: number = this.currentCart.totalShoppingCartPrice;
+  orderPrice: number;
 
-  constructor(public userId: string, public shipping: any, private currentCart: ShoppingCart) {
+  constructor(public userId: string, public shipping: any,  currentCart: ShoppingCart) {
     this.datePlaced = new Date().getTime();
+    this.orderPrice = currentCart.totalShoppingCartPrice;
     this.items = currentCart.items.map(item => {
       return {
         product: {
