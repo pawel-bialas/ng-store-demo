@@ -24,6 +24,7 @@ export class MyOrdersComponent implements OnInit {
 
 
   constructor(private orderService: OrderService, private authService: AuthService) {
+
   }
 
   // Component
@@ -31,6 +32,6 @@ export class MyOrdersComponent implements OnInit {
   ngOnInit() {
     this.myOrders$ = this.authService.user$.pipe(switchMap(user => {
       return this.orderService.getOrdersByUser(user.uid);
-    }));
+    })), this.dtTrigger.next();
   }
 }

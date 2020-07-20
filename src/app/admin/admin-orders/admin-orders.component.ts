@@ -30,6 +30,7 @@ export class AdminOrdersComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     this.ordersSub = this.orderService.getAllOrders().subscribe(orders => {
       this.orders = orders;
+      this.dtTrigger.next();
     });
   }
 

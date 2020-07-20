@@ -16,6 +16,7 @@ export class MainNavComponent implements OnInit, OnDestroy {
   userModel: UserModel;
   currentCart: ShoppingCart;
   private cartSub: Subscription;
+  private userSub: Subscription;
 
 
   constructor(
@@ -43,6 +44,7 @@ export class MainNavComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.cartSub.unsubscribe();
+    this.userSub.unsubscribe();
   }
 
   async logout() {

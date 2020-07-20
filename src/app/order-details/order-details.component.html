@@ -1,1 +1,23 @@
-<p>order-details works!</p>
+<div class="container">
+  <div *ngFor="let order of order" class="row">
+    <div class="col-md-6">
+      <h2>Shipping Details</h2>
+      <div>
+        <p>First Name: {{ order.shipping.firstName}}</p>
+        <p>Last Name: {{ order.shipping.lastName}}</p>
+        <p>Street Name:{{ order.shipping.streetName}}</p>
+        <p>House Number: {{ order.shipping.houseNumber}}</p>
+        <p>City: {{ order.shipping.city}}</p>
+        <p>Postal Code: {{ order.shipping.postalCode}}</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h2>Order Details</h2>
+      <p>Placed on: {{order.datePlaced | date}}</p>
+      <p>Placed by: {{order.userId}}</p>
+      <p>Total Price: {{order.orderPrice}}</p>
+      <p *ngFor="let item of order.items"> {{item.product.title}} x {{item.quantity}} for({{item.product.price |  currency: 'USD' : 'symbol' : '1.2-2'}})</p>
+    </div>
+  </div>
+
+</div>
