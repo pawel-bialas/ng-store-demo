@@ -13,7 +13,7 @@ import {SnapshotAction} from '@angular/fire/database';
 })
 export class OrderDetailsComponent implements OnInit, OnDestroy {
 
-  private orderSub: Subscription;
+  private subscription: Subscription = new Subscription();
   order: Order[] = [];
 
 
@@ -21,13 +21,13 @@ export class OrderDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.orderSub = this.orderService.getOrderByKey(this.route.snapshot.paramMap.get('id')).subscribe(value => {
+    this.subscription.add(this.orderService.getOrderByKey(this.route.snapshot.paramMap.get('id')).subscribe(value => {
       this.order = value;
-    });
+    }));
   }
 
   ngOnDestroy(): void {
-    this.orderSub.unsubscribe();
+    this.subscription.unsubscribe();
   }
 }
 

@@ -15,8 +15,7 @@ export class MainNavComponent implements OnInit, OnDestroy {
 
   userModel: UserModel;
   currentCart: ShoppingCart;
-  private cartSub: Subscription;
-  private userSub: Subscription;
+  private subscription: Subscription = new Subscription();
 
 
   constructor(
@@ -30,7 +29,7 @@ export class MainNavComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
     await this.shoppingCartService.getCurrentCart().then(value =>
-      this.cartSub = value.snapshotChanges().subscribe(cart => {
+      this.subscription.add(value.snapshotChanges().subscribe(cart => {
         const items = cart.payload.child('items').val();
         const key = cart.payload.key;
         const dateCreated = cart.payload.child('dateCreated').val();
@@ -38,13 +37,12 @@ export class MainNavComponent implements OnInit, OnDestroy {
         this.currentCart.key = key;
         this.currentCart.dateCreated = dateCreated;
       })
-    );
-    this.auth.userModel$.subscribe(userModel => this.userModel = userModel);
+    ));
+    this.subscription.add(this.auth.userModel$.subscribe(userModel => this.userModel = userModel));
   }
 
   ngOnDestroy(): void {
-    this.cartSub.unsubscribe();
-    this.userSub.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
   async logout() {

@@ -17,11 +17,10 @@ import {Product} from '../../products/model/Product';
 export class ProductFormComponent implements OnInit, OnDestroy {
 
   categories$: Category[];
-  categoriesSub: Subscription;
-  productSub: Subscription;
   productForm: FormGroup;
   product: Product = {};
   private id: string;
+  private subscription: Subscription = new Subscription();
 
   constructor(
     private categoryService: CategoryService,
@@ -36,17 +35,16 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     this.productForm = this.createProductForm();
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {
-      this.productSub = this.productService.findById(this.id)
-        .valueChanges().pipe(take(1)).subscribe(queryResult => this.product = queryResult);
+      this.subscription.add(this.productService.findById(this.id)
+        .valueChanges().pipe(take(1)).subscribe(queryResult => this.product = queryResult));
     }
-    this.categoriesSub = this.categoryService.getAllCategories().subscribe(
+    this.subscription.add(this.categoryService.getAllCategories().subscribe(
       categories => this.categories$ = categories
-    );
+    ));
   }
 
   ngOnDestroy(): void {
-    this.categoriesSub.unsubscribe();
-    this.productSub.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
   createProductForm(): FormGroup {

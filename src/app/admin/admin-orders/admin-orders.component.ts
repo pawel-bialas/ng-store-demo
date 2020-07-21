@@ -21,21 +21,21 @@ export class AdminOrdersComponent implements OnInit, OnDestroy {
     responsive: true,
     lengthChange: true
   };
-  private ordersSub: Subscription;
+  private subscription: Subscription;
 
 
   constructor(private orderService: OrderService) {
   }
 
   async ngOnInit() {
-    this.ordersSub = this.orderService.getAllOrders().subscribe(orders => {
+    this.subscription.add(this.orderService.getAllOrders().subscribe(orders => {
       this.orders = orders;
       this.dtTrigger.next();
-    });
+    }));
   }
 
   ngOnDestroy(): void {
-    this.ordersSub.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
 }

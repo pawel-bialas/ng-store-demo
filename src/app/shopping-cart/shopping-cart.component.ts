@@ -12,14 +12,14 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
   currentCart: ShoppingCart;
   totalPrice: number;
-  private cartSub: Subscription;
+  private subscription: Subscription = new Subscription();
 
   constructor(private shoppingCartService: ShoppingCartService) {
   }
 
   async ngOnInit() {
     await this.shoppingCartService.getCurrentCart().then(value => {
-      this.cartSub = value.snapshotChanges().subscribe(cart => {
+      this.subscription.add(value.snapshotChanges().subscribe(cart => {
         const items = cart.payload.child('items').val();
         const key = cart.payload.key;
         const dateCreated = cart.payload.child('dateCreated').val();
@@ -27,7 +27,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
         this.currentCart.key = key;
         this.currentCart.dateCreated = dateCreated;
         this.totalPrice = this.shoppingCartService.countTotalPrice(this.currentCart);
-      });
+      }));
     });
   }
 
@@ -37,7 +37,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.cartSub.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
 

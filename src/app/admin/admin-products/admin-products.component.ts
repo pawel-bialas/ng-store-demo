@@ -19,22 +19,22 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   };
   products$: Product[] = [];
   filteredProducts$: Product[] = [];
-  productSub: Subscription;
+  private subscription: Subscription = new Subscription();
 
   constructor(private productService: ProductService) {
   }
 
   ngOnInit(): void {
-    this.productSub = this.productService.getAllProducts().subscribe(
+    this.subscription.add(this.productService.getAllProducts().subscribe(
       products => {
         this.filteredProducts$ = this.products$ = products;
         this.dtTrigger.next();
       }
-    );
+    ));
   }
 
   ngOnDestroy(): void {
-    this.productSub.unsubscribe();
+    this.subscription.unsubscribe();
     this.dtTrigger.unsubscribe();
   }
 

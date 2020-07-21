@@ -18,7 +18,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   filteredProducts: Product[] = [];
   category: string;
   currentCart: ShoppingCart;
-  private productsSub: Subscription;
+  private subscription: Subscription = new Subscription();
   private queryParamsSub: Subscription;
   private cartSub: Subscription;
 
@@ -30,19 +30,19 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
-    this.productsSub = this.productService.getAllProducts().subscribe(products => {
+    this.subscription.add(this.productService.getAllProducts().subscribe(products => {
       this.products = products;
       this.filteredProducts = products;
-    });
-    this.queryParamsSub = this.route.queryParams.subscribe(params => {
+    }));
+    this.subscription.add(this.route.queryParams.subscribe(params => {
       this.filteredProducts = this.products;
       this.category = params.category;
       this.filteredProducts = (this.category) ?
         this.filteredProducts.filter(product => product.category === this.category) :
         this.products;
-    });
+    }));
     await this.shoppingCartService.getCurrentCart().then(value =>
-      this.cartSub = value.snapshotChanges().subscribe(cart => {
+      this.subscription.add(value.snapshotChanges().subscribe(cart => {
         const items = cart.payload.child('items').val();
         const key = cart.payload.key;
         const dateCreated = cart.payload.child('dateCreated').val();
@@ -50,13 +50,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
         this.currentCart.key = key;
         this.currentCart.dateCreated = dateCreated;
       })
-    );
+    ));
   }
 
   ngOnDestroy(): void {
-    this.productsSub.unsubscribe();
-    this.queryParamsSub.unsubscribe();
-    this.cartSub.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
 }

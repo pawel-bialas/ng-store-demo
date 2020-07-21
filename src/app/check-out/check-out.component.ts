@@ -18,8 +18,7 @@ export class CheckOutComponent implements OnInit, OnDestroy {
 
   currentCart: ShoppingCart;
   userId: string;
-  private cartSub: Subscription;
-  private userSub: Subscription;
+  private subscription: Subscription = new Subscription();
 
   constructor(
     private orderService: OrderService,
@@ -29,9 +28,9 @@ export class CheckOutComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
-    this.userSub = this.authService.user$.subscribe(user => this.userId = user.uid);
+    this.subscription.add(this.authService.user$.subscribe(user => this.userId = user.uid));
     await this.shoppingCartService.getCurrentCart().then(value =>
-      this.cartSub = value.snapshotChanges().subscribe(cart => {
+      this.subscription.add(value.snapshotChanges().subscribe(cart => {
         const items = cart.payload.child('items').val();
         const key = cart.payload.key;
         const dateCreated = cart.payload.child('dateCreated').val();
@@ -39,12 +38,11 @@ export class CheckOutComponent implements OnInit, OnDestroy {
         this.currentCart.key = key;
         this.currentCart.dateCreated = dateCreated;
       })
-    );
+    ));
   }
 
 
   ngOnDestroy(): void {
-    this.cartSub.unsubscribe();
-    this.userSub.unsubscribe();
+    this.subscription.unsubscribe();
   }
 }
