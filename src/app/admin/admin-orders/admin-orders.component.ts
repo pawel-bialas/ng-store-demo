@@ -21,7 +21,7 @@ export class AdminOrdersComponent implements OnInit, OnDestroy {
     responsive: true,
     lengthChange: true
   };
-  private subscription: Subscription;
+  private subscription: Subscription = new Subscription();
 
 
   constructor(private orderService: OrderService) {
